@@ -1,3 +1,29 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+app.route.user.create_admin:
+  path: /user/create/admin
+  defaults:
+    _controller: AppBundle:ApiUser:createAdmin
+
+app.route.user.create_user:
+  path: /user/create/user
+  defaults:
+    _controller: AppBundle:ApiUser:createUser
+
+app.route.coffee.create:
+  path: /coffee/create
+  defaults:
+    _controller: AppBundle:Coffee:createCoffee
+
+app.route.coffee.update:
+  path: /coffee/update
+  defaults:
+    _controller: AppBundle:Coffee:updateCoffee
+
+app.route.coffee.list:
+  path: /coffee/list
+  defaults:
+    _controller: AppBundle:Coffee:listCoffee
+
+app.route.coffee.delete:
+  path: /coffee/delete
+  defaults:
+    _controller: AppBundle:Coffee:deleteCoffee

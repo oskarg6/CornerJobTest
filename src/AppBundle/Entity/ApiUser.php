@@ -160,6 +160,13 @@ class ApiUser
         return $this;
     }
 
-    
+    public function toArray()
+    {
+        return [
+            'id' => $this->getId(),
+            'username' => $this->getUsername(),
+            'role' => $this->getRole()
+        ];
+    }
 }
 
