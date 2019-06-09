@@ -1,0 +1,37 @@
+---
+- name: Update apt
+  apt:
+    update_cache: yes
+
+- name: Install system packages
+  apt:
+    pkg: '{{ item }}'
+    state: latest
+  with_items:
+    - curl
+    - wget
+    - python-software-properties
+
+- name: Install extra packages
+  apt:
+    pkg: '{{ item }}'
+    state: latest
+  with_items: '{{ server.packages }}'
+  when: server.packages is defined
+
+- name: Configure the timezone
+  template:
+    src: timezone
+    dest: /etc/timezone
+
+- name: More configuration of timezone
+  file:
+    src: '/usr/share/zoneinfo/{{ server.timezone }}'
+    dest: /etc/localtime
+    state: link
+    force: yes
+
+- name: Set default system language pack
+  command: 'locale-gen {{ server.locale }}'
+
+- include: swap.yml
