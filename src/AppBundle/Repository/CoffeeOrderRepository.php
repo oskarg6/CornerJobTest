@@ -47,8 +47,8 @@ class CoffeeOrderRepository
     {
         $builder = $this->entityManger->createQueryBuilder();
 
-        $query = $builder->select('order')
-            ->from('AppBundle:CoffeeOrder', 'order')
+        $query = $builder->select('coffee_order')
+            ->from('AppBundle:CoffeeOrder', 'coffee_order')
             ->getQuery();
 
         return $query->getResult();
@@ -62,9 +62,9 @@ class CoffeeOrderRepository
     {
         $builder = $this->entityManger->createQueryBuilder();
 
-        $query = $builder->select('order')
-            ->from('AppBundle:CoffeeOrder', 'order')
-            ->where('order.id = :id')
+        $query = $builder->select('coffee_order')
+            ->from('AppBundle:CoffeeOrder', 'coffee_order')
+            ->where('coffee_order.id = :id')
             ->setParameter('id', $id)
             ->getQuery();
 
@@ -78,13 +78,14 @@ class CoffeeOrderRepository
      */
     public function getOrderByCoffeeAndUser(Coffee $coffee, ApiUser $user)
     {
-
         $builder = $this->entityManger->createQueryBuilder();
 
-        $query = $builder->select('order')
-            ->from('AppBundle:CoffeeOrder', 'order')
-            ->where('order.coffee.id = :coffee_id')
-            ->andWhere('order.apiUser.id = :user_id')
+        $query = $builder->select('coffee_order')
+            ->from('AppBundle:CoffeeOrder', 'coffee_order')
+            ->leftJoin('coffee_order.coffee', 'coffee')
+            ->leftJoin('coffee_order.apiUser', 'apiUser')
+            ->where('coffee.id = :coffee_id')
+            ->andWhere('apiUser.id = :user_id')
             ->setParameter('coffee_id', $coffee->getId())
             ->setParameter('user_id', $user->getId())
             ->getQuery();
