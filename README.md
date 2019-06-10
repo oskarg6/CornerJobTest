@@ -1,4 +1,34 @@
-# Base Project
+# CornerJob Test
+## Aplicación de control de gestión de stock 
+La aplicación gestiona el stock de cafés de una cafeteria.
+Se basa en una API Rest en la cual podremos crear usuarios (admin y user), 
+podremos crear cafés, y podremos hacer pedidos sobre ellos.
+
+The aplication manages the stock of coffees from coffeeshop.
+Is based in a API Rest where we can create users (admin and user),
+we can create coffees and we can do orders of them.
+
+## Ejemplos de peticiones
+#### Crear usuario admin
+ ``http://cornerjob.test/user/create/admin?username=admin&password=admin ``
+#### Crear usuario normal
+``http://cornerjob.test/user/create/user?username=tests&password=test ``
+#### Crear un café
+``http://cornerjob.test/coffee/create?username=admin&password=admin&name=solo&intensity=3&price=1.2&stock=100``
+#### Listar los cafés
+``http://cornerjob.test/coffee/list``
+#### Modificar un café
+``http://cornerjob.test/coffee/update?username=admin&password=admin&id=3&intensity=11``
+#### Eliminar un café
+``http://cornerjob.test/coffee/delete?username=admin&password=admin&id=3``
+#### Crear orden
+``http://cornerjob.test/order/create?username=tests1&password=tests1&coffee=late&quantity=1``
+#### Listar las ordenes
+``http://cornerjob.test/order/list``
+#### Modificar orden
+``http://cornerjob.test/order/update?username=tests1&password=tests1&coffee=solo&quantity=2``
+#### Eliminar orden
+``http://cornerjob.test/order/delete?username=tests1&password=tests1&id=2``
 
 ## Instalación del proyecto
 
@@ -110,5 +140,7 @@ development:
  
  ##### Personalizar Deployer
  Para desplegar la aplicación desde deployerPHP es necesario que se rellene la configuración en `/servers.yml`. Y se ha de crear el fichero `/usergit.php` con las variables `$user` y `$password`. Este fichero `usergit.php` esta vigilado por el `.gitignore` asi que nunca se subirá a tu repositorio. 
+ 
+
  
   
