@@ -33,12 +33,38 @@ services:
         class: AppBundle\Controller\ApiUserController
         public: true
         arguments:
-            $userRepository: "@app.repository.api_user"
+            $apiUserService: "@app.service.api_user"
         tags: ['controller.service_arguments']
 
-    # add more services, or override services that need manual wiring
+    app.controller.coffee:
+        class: AppBundle\Controller\CoffeeController
+        public: true
+        arguments:
+            $coffeeService: "@app.service.coffee"
+            $apiUserService: "@app.service.api_user"
+        tags: ['controller.service_arguments']
+
+    # Repositories
     app.repository.api_user:
         class: AppBundle\Repository\ApiUserRepository
         public: true
         arguments:
             $entityManager: "@doctrine.orm.entity_manager"
+
+    app.repository.coffee:
+        class: AppBundle\Repository\CoffeeRepository
+        public: true
+        arguments:
+            $entityManager: "@doctrine.orm.entity_manager"
+
+
+    # Services
+    app.service.api_user:
+        class: AppBundle\Service\ApiUserService
+        arguments:
+            $apiUserRepository: "@app.repository.api_user"
+
+    app.service.coffee:
+        class: AppBundle\Service\CoffeeService
+        arguments:
+            $coffeeRepository: "@app.repository.coffee"

@@ -190,5 +190,16 @@ class Coffee
 
         return $this;
     }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'intensity' => $this->getIntensity(),
+            'price' => $this->getPrice(),
+            'stock' => $this->getStock()
+        ];
+    }
 }
 

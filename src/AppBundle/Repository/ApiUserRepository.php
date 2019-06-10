@@ -26,4 +26,16 @@ class ApiUserRepository
         $this->entityManger->persist($user);
         $this->entityManger->flush();
     }
+
+    public function getUserByUsername($username)
+    {
+        $builder = $this->entityManger->createQueryBuilder();
+        $query = $builder->select('user')
+            ->from('AppBundle:ApiUser', 'user')
+            ->where('user.username = :username')
+            ->setParameter('username', $username)
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
 }
