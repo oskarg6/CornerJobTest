@@ -25,6 +25,11 @@ class ApiUserService
         $this->userRepository = $apiUserRepository;
     }
 
+    /**
+     * @param $username
+     * @param $password
+     * @return bool
+     */
     public function isValidAdminUser($username, $password)
     {
         $user = $this->userRepository->getUserByUsername($username);
@@ -40,6 +45,11 @@ class ApiUserService
         }
     }
 
+    /**
+     * @param $username
+     * @param $password
+     * @return bool
+     */
     public function isValidUser($username, $password)
     {
         $user = $this->userRepository->getUserByUsername($username);
@@ -55,6 +65,10 @@ class ApiUserService
         }
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function createAdmin(Request $request)
     {
         $user = new ApiUser();
@@ -67,6 +81,10 @@ class ApiUserService
         return $user->toArray();
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function createUser(Request $request)
     {
         $user = new ApiUser();
@@ -79,11 +97,20 @@ class ApiUserService
         return $user->toArray();
     }
 
+    /**
+     * @param $password
+     * @return bool|string
+     */
     public function encryptPassword($password)
     {
         return password_hash($password, PASSWORD_DEFAULT);
     }
 
+    /**
+     * @param $password
+     * @param $hash
+     * @return bool
+     */
     private function verifyPasswordHash($password, $hash)
     {
         return password_verify($password ,$hash);

@@ -143,5 +143,16 @@ class CoffeeOrder
 
         return $this;
     }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->getId(),
+            'amount' => $this->getAmount(),
+            'quantity' => $this->getQuantity(),
+            'user_id' => $this->getApiUser()->getId(),
+            'coffee_id' => $this->getCoffee()->getId()
+        ];
+    }
 }
 

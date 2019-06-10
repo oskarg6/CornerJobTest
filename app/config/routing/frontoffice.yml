@@ -27,3 +27,23 @@ app.route.coffee.delete:
   path: /coffee/delete
   defaults:
     _controller: AppBundle:Coffee:deleteCoffee
+
+app.route.order.create:
+  path: /order/create
+  defaults:
+    _controller: AppBundle:CoffeeOrder:createOrder
+
+app.route.order.update:
+  path: /order/update
+  defaults:
+    _controller: AppBundle:CoffeeOrder:updateOrder
+
+app.route.order.list:
+  path: /order/list
+  defaults:
+    _controller: AppBundle:CoffeeOrder:listOrders
+
+app.route.order.delete:
+  path: /order/delete
+  defaults:
+    _controller: AppBundle:CoffeeOrder:deleteOrder

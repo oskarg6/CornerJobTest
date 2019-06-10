@@ -39,6 +39,16 @@ class CoffeeController
         return $response;
     }
 
+    public function listCoffeeAction()
+    {
+        $coffees = $this->coffeeService->listCoffee();
+
+        $response = new Response(json_encode($coffees));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
     public function updateCoffeeAction(Request $request)
     {
         if ($this->userService->isValidAdminUser($request->query->get('username'), $request->query->get('password'))) {
@@ -47,22 +57,12 @@ class CoffeeController
             if ($coffee) {
                 $response = new Response(json_encode($coffee));
             } else {
-                $response = new Response(json_encode(['status' => 'ERROR', 'message' => 'invalid coffee id']));
+                $response = new Response(json_encode(['status' => 'ERROR', 'message' => 'invalid coffee or the user don\'t have order or not is set the quantity']));
             }
         } else {
             $response = new Response(json_encode(['status' => 'ERROR', 'message' => 'invalid user']));
         }
 
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
-    }
-
-    public function listCoffeeAction()
-    {
-        $coffees = $this->coffeeService->listCoffee();
-
-        $response = new Response(json_encode($coffees));
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;

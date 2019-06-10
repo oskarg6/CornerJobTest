@@ -44,6 +44,14 @@ services:
             $apiUserService: "@app.service.api_user"
         tags: ['controller.service_arguments']
 
+    app.controller.coffee_order:
+        class: AppBundle\Controller\CoffeeOrderController
+        public: true
+        arguments:
+            $coffeeOrderService: "@app.service.coffee_order"
+            $apiUserService: "@app.service.api_user"
+        tags: ['controller.service_arguments']
+
     # Repositories
     app.repository.api_user:
         class: AppBundle\Repository\ApiUserRepository
@@ -53,6 +61,12 @@ services:
 
     app.repository.coffee:
         class: AppBundle\Repository\CoffeeRepository
+        public: true
+        arguments:
+            $entityManager: "@doctrine.orm.entity_manager"
+
+    app.repository.coffee_order:
+        class: AppBundle\Repository\CoffeeOrderRepository
         public: true
         arguments:
             $entityManager: "@doctrine.orm.entity_manager"
@@ -68,3 +82,11 @@ services:
         class: AppBundle\Service\CoffeeService
         arguments:
             $coffeeRepository: "@app.repository.coffee"
+
+    app.service.coffee_order:
+        class: AppBundle\Service\CoffeeOrderService
+        arguments:
+            $coffeeRepository: "@app.repository.coffee_order"
+            $apiUserRepository: "@app.repository.api_user"
+            $coffeeRepository: "@app.repository.coffee"
+            $coffeeService: "@app.service.coffee"

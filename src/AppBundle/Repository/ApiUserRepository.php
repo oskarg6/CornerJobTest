@@ -21,12 +21,19 @@ class ApiUserRepository
         $this->entityManger = $entityManager;
     }
 
+    /**
+     * @param ApiUser $user
+     */
     public function save(ApiUser $user)
     {
         $this->entityManger->persist($user);
         $this->entityManger->flush();
     }
 
+    /**
+     * @param $username
+     * @return mixed
+     */
     public function getUserByUsername($username)
     {
         $builder = $this->entityManger->createQueryBuilder();

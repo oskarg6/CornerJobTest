@@ -95,4 +95,14 @@ class CoffeeService
 
         return true;
     }
+
+    /**
+     * @param Coffee $coffee
+     * @param $stock
+     */
+    public function changeCoffeeStock(Coffee $coffee, $stock)
+    {
+        $coffee->setStock($stock);
+        $this->coffeeRepository->save($coffee);
+    }
 }
